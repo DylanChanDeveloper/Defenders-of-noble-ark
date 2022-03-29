@@ -12,7 +12,7 @@ public class myCoOrdinateLabeler : MonoBehaviour
     void Awake()//awake is the very first thing that will execute. meaning code encapsulated by the void awkae function will execute first.
     {
         myLabel = GetComponent<TextMeshPro>();//gets the textmeshpro component attached to this object and stores it in the myLabel variable
-        CoordinateDisplay();//need to run the method in awake and update otherwise in play mode the method will break if we dont call it in awake
+        CoordinateDisplay();//need to run the method in awake otherwise when we play the scene because of execute always the game will break if we dont call it in awake
     }
     // Update is called once per frame
     void Update()
