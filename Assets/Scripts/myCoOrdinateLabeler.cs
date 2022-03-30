@@ -27,7 +27,7 @@ public class myCoOrdinateLabeler : MonoBehaviour
     void CoordinateDisplay()
     {
         myCoordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);//we encapuslate transform.parent.position.x because of a conversion error, mathf.roundtoint returns a float to a int.Are coordinates are in multiples of ten. dividing it by the unityeditor move x will give us the coordinates for the current location
-        myCoordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);//we encapuslate transform.parent.position.x because of a conversion error, mathf.roundtoint returns a float to a int.
+        myCoordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);//we encapuslate transform.parent.position.x because of a conversion error, mathf.roundtoint returns a float to a int. we are getting the z coordinate because we are working in the 2D x,z plain
 
         myLabel.text = myCoordinates.x + "," + myCoordinates.y;//changes the text in the textmeshpro "mylabel" to the corodinates of my coordinates x and y
     }
