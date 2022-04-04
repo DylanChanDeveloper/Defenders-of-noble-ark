@@ -27,6 +27,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2509522281997518344, guid: 34747523d4ae56642b8f08db8e996e8a, type: 3}
+      propertyPath: canBePlaced
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6880759999375820264, guid: 34747523d4ae56642b8f08db8e996e8a, type: 3}
       propertyPath: m_Name
       value: Tile_path 90
@@ -73,6 +77,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6880759999375820265, guid: 34747523d4ae56642b8f08db8e996e8a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7018948888467967747, guid: 34747523d4ae56642b8f08db8e996e8a, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
