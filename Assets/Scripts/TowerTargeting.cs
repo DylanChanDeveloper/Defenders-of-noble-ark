@@ -9,7 +9,7 @@ public class TowerTargeting : MonoBehaviour
     void Start()
     {
         target = FindObjectOfType<EnemyMovement>().transform;
-
+        //finds the first object of type enemyMovement and its transform then reassigns the return value to target.
     }
 
 
