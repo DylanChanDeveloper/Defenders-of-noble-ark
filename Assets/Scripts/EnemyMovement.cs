@@ -11,11 +11,31 @@ public class EnemyMovement : MonoBehaviour
                                                                      //we finally initalize the list with new List<Waypoints>, e.g. we initalize pathway to a new list of waypoints
     void Start()
     {
-        StartCoroutine(PrintWayPoint());//using a co routine so for loop will wait for x amount of seconds before executing. To prevent object from teleporting from point A to B instantly
+        FindPoint();
+        ReturnToStart();
+        StartCoroutine(FollowPoint());//using a co routine so for loop will wait for x amount of seconds before executing. To prevent object from teleporting from point A to B instantly
     //1.we are going to start our co-routine here
     }
 
-    IEnumerator PrintWayPoint()
+    void FindPoint()
+    {
+        myPathWay.Clear();//when we find a path, we're going to clear the existing one and then add a new one. To prevent the path adding existing paths and getting longer.
+
+        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Pathway");//finds all the objects with tag Pathway and places it in a array.
+
+        foreach(GameObject waypoint in waypoints)//we then loop through the waypoints array object
+        {
+            myPathWay.Add(waypoint.GetComponent<Waypoint>());//we then find the waypoint component on the object,  then add it to are List called myPathWay. 
+        }
+
+    }
+
+   public void ReturnToStart()
+    {
+        transform.position = myPathWay[0].transform.position;//gets the first elements position and stores it in transform.position
+    }
+
+    IEnumerator FollowPoint()
     {
         foreach (Waypoint myWaypoint in myPathWay)//loops through every element in the list 2.co routine starts the for loop
         {
@@ -34,6 +54,8 @@ public class EnemyMovement : MonoBehaviour
 
             //No longer needed: transform.position = myWaypoint.transform.position;//the first transform.position is on the root of our enemy object we are reassigning the enemy object position to be the waypoints position.          
         }
+
+        Destroy(gameObject);
     }
 
     //Can also be written like this:

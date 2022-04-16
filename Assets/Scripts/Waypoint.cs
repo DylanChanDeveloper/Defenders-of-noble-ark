@@ -8,7 +8,11 @@ public class Waypoint : MonoBehaviour
     [SerializeField] bool canBePlaced;//did not delcare true or false because we set if the object bool is true in the inspector.
     
     public bool CanBePlaced//this is a property method notice that there is no "()" vs a normal method that would have parmeter brackets.property being used in myCoOrdinateLabeler
-    {  get{  return canBePlaced;   }   }
+    {  
+        get{return canBePlaced;}
+
+        set { canBePlaced = value; }
+    }
 
 
   
