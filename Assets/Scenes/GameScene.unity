@@ -280,8 +280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a76860b0b8f0f6408869d082e404d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myEnemies: {fileID: 6359617022165888154, guid: 76169cacd6cc0f446bc8ed5906ddc070, type: 3}
+  myEnemiePrefab: {fileID: 6359617022165888154, guid: 76169cacd6cc0f446bc8ed5906ddc070, type: 3}
   spawnTimer: 1
+  poolSize: 5
 --- !u!4 &320587528
 Transform:
   m_ObjectHideFlags: 0

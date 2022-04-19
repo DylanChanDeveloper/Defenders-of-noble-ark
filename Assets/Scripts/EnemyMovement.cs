@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] List<Waypoint> myPathWay = new List<Waypoint>();//List syntax is we declare the list with sheverons, 
                                                                      //then inside the cheverons we specifiy the thing its goint to be storing in this case the waypoint script,
                                                                      //we finally initalize the list with new List<Waypoints>, e.g. we initalize pathway to a new list of waypoints
-    void Start()
+    void OnEnable()// onEnable and on disable is called whenever a object is either enabled or disabled in the hierarchy.
     {
         FindPoint();
         ReturnToStart();
@@ -55,7 +55,7 @@ public class EnemyMovement : MonoBehaviour
             //No longer needed: transform.position = myWaypoint.transform.position;//the first transform.position is on the root of our enemy object we are reassigning the enemy object position to be the waypoints position.          
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);//were turning the gameobject off, rather then destroy it because it will be free for the pool to reuse again later.
     }
 
     //Can also be written like this:

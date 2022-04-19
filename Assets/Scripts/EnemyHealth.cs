@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int Totalhitpoints = 4;
     [SerializeField] int currentHitPoints;//serilizing the currenthitpoints will allow us to see updates on the variable in the inspector.
 
-    void Start()
+    void OnEnable()// onEnable and on disable is called whenever a object is either enabled or disabled in the hierarchy. will reset the health if damage was taken.
     {
         currentHitPoints = Totalhitpoints;
     }
@@ -27,7 +27,8 @@ public class EnemyHealth : MonoBehaviour
 
         if(currentHitPoints <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+           // Destroy(gameObject); instead of destroying the object we disable it for our object pool to reuse
         }
     }
 }
