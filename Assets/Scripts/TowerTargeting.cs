@@ -3,23 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerTargeting : MonoBehaviour
-{
-     Transform target;
+{    
     [SerializeField] Transform weapon;
-    void Start()
-    {
-        target = FindObjectOfType<EnemyMovement>().transform;
-        //finds the first object of type enemyMovement and its transform then reassigns the return value to target.
-    }
-
+    [SerializeField] ParticleSystem projectileParticles;
+    Transform target;
+    [SerializeField] float maxRange = 10f;
 
     void Update()
     {
+        FindClosestTarget();
         AimWeapon();
+    }
+
+   void FindClosestTarget()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Transform closestTarget = null;
+        float maxDistance = Mathf.Infinity;
+
+        foreach(Enemy enemy in enemies)
+        {
+            float targetDistance = Vector3.Distance(transform.position, enemy.transform.position);
+
+            if(targetDistance < maxDistance)
+            {
+                closestTarget = enemy.transform;
+                maxDistance = targetDistance;
+            }
+        }
+
+        target = closestTarget;
     }
 
     void AimWeapon()
     {
+        float targetDistance = Vector3.Distance(transform.position, target.position);
+
         weapon.LookAt(target);
+
+        //Attack();
+    }
+
+    void Attack(bool isActive)
+    {
+
     }
 }

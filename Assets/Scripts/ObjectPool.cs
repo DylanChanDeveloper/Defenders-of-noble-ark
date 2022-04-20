@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
 {
     [SerializeField] GameObject myEnemiePrefab;
     [SerializeField] float spawnTimer = 1f;
-    [SerializeField] int poolSize = 5; //when going to have 5 enemies in our object ppol.
+    [SerializeField] int poolSize = 5; //when going to have 5 enemies in our object pool.
 
     GameObject[] Pool;
 
@@ -19,16 +19,35 @@ public class ObjectPool : MonoBehaviour
     void Start()
     {
         StartCoroutine(enemySpawn());//calling co-routine
+      
     }
 
     IEnumerator enemySpawn()//co routine declaration
     {
             while (true) 
             {
-                EnableObjectInPool();
+            test();
+                //EnableObjectInPool();
                 yield return new WaitForSeconds(spawnTimer);
             }              
     }
+
+    void test()
+    {
+        for(int i = 0; i < Pool.Length; i++)
+        {
+            if (Pool[i].activeInHierarchy == false)
+            {
+                Pool[i].SetActive(true);
+                return;
+            }
+
+           
+        }
+    }
+
+
+
 
     void EnableObjectInPool()
     {
