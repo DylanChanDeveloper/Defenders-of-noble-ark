@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-
     [SerializeField] [Range(0f, 5f)] float mySpeed = 1f;
     [SerializeField] List<Waypoint> myPathWay = new List<Waypoint>();//List syntax is we declare the list with sheverons, 
                                                                      //then inside the cheverons we specifiy the thing its goint to be storing in this case the waypoint script,
                                                                      //we finally initalize the list with new List<Waypoints>, e.g. we initalize pathway to a new list of waypoints
+
+    Enemy myEnemy;//creating a myEnemy variable to access enemy script.
+
+    public void Start()
+    {
+        myEnemy = GetComponent<Enemy>();//gets the enemy script and stores it in the myEnemy value to access. We use GetComponent and not findObject of type because our enemy and enemyHealth script are both on the root of our object.
+    }
+
     void OnEnable()// onEnable and on disable is called whenever a object is either enabled or disabled in the hierarchy.
     {
         FindPoint();
@@ -31,7 +38,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
    public void ReturnToStart()
-    {
+    {    
         transform.position = myPathWay[0].transform.position;//gets the first elements position and stores it in transform.position
     }
 
@@ -54,8 +61,8 @@ public class EnemyMovement : MonoBehaviour
 
             //No longer needed: transform.position = myWaypoint.transform.position;//the first transform.position is on the root of our enemy object we are reassigning the enemy object position to be the waypoints position.          
         }
-
-        gameObject.SetActive(false);//were turning the gameobject off, rather then destroy it because it will be free for the pool to reuse again later.
+        myEnemy.stealGold();//access the enemy script and the steals gold.
+        gameObject.SetActive(false);//were turning the gameobject off, rather then destroy it because it will be free for the pool to reuse again later.    
     }
 
     //Can also be written like this:

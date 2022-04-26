@@ -6,16 +6,18 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int Totalhitpoints = 4;
     [SerializeField] int currentHitPoints;//serilizing the currenthitpoints will allow us to see updates on the variable in the inspector.
-
+    Enemy myEnemy;//creating a myEnemy variable to access enemy script.
     void OnEnable()// onEnable and on disable is called whenever a object is either enabled or disabled in the hierarchy. will reset the health if damage was taken.
     {
         currentHitPoints = Totalhitpoints;
     }
 
-    // Update is called once per frame
-   
+     void Start()
+    {
+        myEnemy = GetComponent<Enemy>();//gets the enemy script and stores it in the myEnemy value to access. We use GetComponent and not findObject of type because our enemy and enemyHealth script are both on the root of our object.
+    }
 
-     void OnParticleCollision(GameObject other)
+    void OnParticleCollision(GameObject other)
     {//enable the collision module and make sure "send collision mesage" is ticked this will allow the particle collision to register.
         processHit();
     }
@@ -28,7 +30,9 @@ public class EnemyHealth : MonoBehaviour
         if(currentHitPoints <= 0)
         {
             gameObject.SetActive(false);
-           // Destroy(gameObject); instead of destroying the object we disable it for our object pool to reuse
+            // Destroy(gameObject); instead of destroying the object we disable it for our object pool to reuse
+
+            myEnemy.Reward();//accessing and calling the reward method in our enemy script
         }
     }
 }
