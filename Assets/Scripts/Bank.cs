@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bank : MonoBehaviour
 {
@@ -25,5 +26,16 @@ public class Bank : MonoBehaviour
     public void withdraw(int amountTwo)
     {
         currentBalance -= Mathf.Abs(amountTwo); //will do the same if its 10 it will withdrawn 10 from our accpount, but if it is -10 mathf.abs will convert it to 10 and minus it from our account.
+       
+        if(currentBalance < 0)
+        {
+            reloadScene(); //lose game;
+        }
+    }
+
+    void reloadScene()
+    {
+        Scene myCurrentScene = SceneManager.GetActiveScene();//gets a reference to the current scene
+        SceneManager.LoadScene(myCurrentScene.buildIndex);//loads the myCurrentScene build index in this case being the active scene.
     }
 }
