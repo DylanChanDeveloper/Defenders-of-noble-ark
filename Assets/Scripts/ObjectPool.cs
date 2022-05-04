@@ -6,8 +6,8 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] GameObject myEnemiePrefab;
-    [SerializeField] float spawnTimer = 1f;
-    [SerializeField] int poolSize = 5; //when going to have 5 enemies in our object pool.
+    [SerializeField] [Range(0.1f, 30f)] float spawnTimer = 1f;// we can make the enemies spawn quickly they just cant all spawn at once.
+    [SerializeField] [Range(0, 50)] int poolSize; //will stop our number going negitive, which would give us errors and limit the amount of instantiated object were going to have in our scene .
 
     GameObject[] Pool;
 
@@ -26,34 +26,17 @@ public class ObjectPool : MonoBehaviour
     {
             while (true) 
             {
-            test();
+            EnableObjectInPool();
                 //EnableObjectInPool();
                 yield return new WaitForSeconds(spawnTimer);
             }              
     }
 
-    void test()
-    {
-        for(int i = 0; i < Pool.Length; i++)
-        {
-            if (Pool[i].activeInHierarchy == false)
-            {
-                Pool[i].SetActive(true);
-                return;
-            }
-
-           
-        }
-    }
-
-
-
-
     void EnableObjectInPool()
     {
-       for(int i = 0; i <Pool.Length; i++)//loops through the Pool length 
+        for (int i = 0; i < Pool.Length; i++)//loops through the Pool length 
         {
-            if(Pool[i].activeInHierarchy == false)//if any of the pools items are found to not be active
+            if (Pool[i].activeInHierarchy == false)//if any of the pools items are found to not be active
             {
                 Pool[i].SetActive(true);//the pool will be set active.
                 return;//we then return early.
@@ -74,6 +57,20 @@ public class ObjectPool : MonoBehaviour
         }
     }
 }
+
+// void test()
+//  {
+//      for(int i = 0; i < Pool.Length; i++)
+//    {
+//         if (Pool[i].activeInHierarchy == false)
+//         {
+//            Pool[i].SetActive(true);
+//            return;
+//
+
+//    }
+// }
+
 
 //while loops means while some condition is true.
 //while(true) can be dangerious because if we dont give it a way to break out a infinate loop will occur and crash the game.

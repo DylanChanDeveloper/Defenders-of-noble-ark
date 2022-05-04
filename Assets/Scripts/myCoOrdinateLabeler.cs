@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using System;
 
+//MOVE THIS SCRIPT TO THE EDITOR FOLDER WHEN READY TO BUILD.
+
+[RequireComponent(typeof(TextMeshPro))]
 [ExecuteAlways]//script will now execute during play and edit mode
 public class myCoOrdinateLabeler : MonoBehaviour
 {
@@ -30,11 +33,11 @@ public class myCoOrdinateLabeler : MonoBehaviour
             UpdateObjectName();
         }
 
-        ColorCoordinates();
+        SetLabelColor();
          ToggleLabels();
     }
 
-   void ColorCoordinates()
+   void SetLabelColor()
     {
         if (waypoint.CanBePlaced)//accessing the CanBePlaced property method in waypoint script. 
         {

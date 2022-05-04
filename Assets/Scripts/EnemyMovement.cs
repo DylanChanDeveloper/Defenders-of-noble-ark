@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]//we require the Enemy component, when we use requireComponent and attach this script to a object it will automatically bring in the "Enemy" script. Remember it wont try to bring in the script if it already exsists e.g. if you manually placed it in before writting this code.
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] [Range(0f, 5f)] float mySpeed = 1f;
@@ -18,21 +19,27 @@ public class EnemyMovement : MonoBehaviour
 
     void OnEnable()// onEnable and on disable is called whenever a object is either enabled or disabled in the hierarchy.
     {
-        FindPoint();
+        FindPath();
         ReturnToStart();
         StartCoroutine(FollowPoint());//using a co routine so for loop will wait for x amount of seconds before executing. To prevent object from teleporting from point A to B instantly
     //1.we are going to start our co-routine here
     }
 
-    void FindPoint()
+    void FindPath()
     {
         myPathWay.Clear();//when we find a path, we're going to clear the existing one and then add a new one. To prevent the path adding existing paths and getting longer.
 
-        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Pathway");//finds all the objects with tag Pathway and places it in a array.
+        GameObject myParent = GameObject.FindGameObjectWithTag("Pathway");//finds the object with tag Pathway and places it in the myParent GameObject variable.
 
-        foreach(GameObject waypoint in waypoints)//we then loop through the waypoints array object
+        foreach(Transform myChild in myParent.transform)//what this foreach does now is, find that myParent object that we've tagged with the "Pathway" and loops through all its children in order.
         {
-            myPathWay.Add(waypoint.GetComponent<Waypoint>());//we then find the waypoint component on the object,  then add it to are List called myPathWay. 
+            Waypoint waypoint = myChild.GetComponent<Waypoint>();//were going to look for a waypoint called waypoint and its going to equal to myChild.GetComponent<Waypoint>()
+
+            if (waypoint != null)//guard statement if the waypoint is not null 
+            {
+                myPathWay.Add(waypoint);//then we want to add are waypoint to the path.
+            }     
+            //these changes will ensure are waypoint is in the correct order and that our path only exists of waypoints and nothing that accidentally slips into that folder later on.
         }
 
     }
@@ -40,6 +47,12 @@ public class EnemyMovement : MonoBehaviour
    public void ReturnToStart()
     {    
         transform.position = myPathWay[0].transform.position;//gets the first elements position and stores it in transform.position
+    }
+
+    void finishPoint()
+    {
+        myEnemy.stealGold();//access the enemy script and the steals gold.
+        gameObject.SetActive(false);//were turning the gameobject off, rather then destroy it because it will be free for the pool to reuse again later.    
     }
 
     IEnumerator FollowPoint()
@@ -61,8 +74,7 @@ public class EnemyMovement : MonoBehaviour
 
             //No longer needed: transform.position = myWaypoint.transform.position;//the first transform.position is on the root of our enemy object we are reassigning the enemy object position to be the waypoints position.          
         }
-        myEnemy.stealGold();//access the enemy script and the steals gold.
-        gameObject.SetActive(false);//were turning the gameobject off, rather then destroy it because it will be free for the pool to reuse again later.    
+        finishPoint();
     }
 
     //Can also be written like this:
@@ -76,3 +88,7 @@ public class EnemyMovement : MonoBehaviour
 
     //}
 }
+
+
+//In Unity, components are the parts that you attach to your GameObject. 
+//The parts, or components, that you attach, or add, to your GameObject are what makes your GameObject do the things you want it to do.
