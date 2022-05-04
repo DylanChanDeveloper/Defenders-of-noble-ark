@@ -1559,8 +1559,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1440286767}
   - component: {fileID: 1440286766}
+  - component: {fileID: 1440286769}
+  - component: {fileID: 1440286768}
   m_Layer: 0
-  m_Name: myObject
+  m_Name: testObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1594,6 +1596,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1440286768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440286765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9dfcfd9342d5db40a46d8a716d6410c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Totalhitpoints: 4
+  difficultyRamp: 1
+--- !u!114 &1440286769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440286765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcc1454c3d508a44b2b906c6776e09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldReward: 15
+  goldPenalty: 25
 --- !u!1001 &1480241525
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -42,7 +42,12 @@ public class Bank : MonoBehaviour
 
         if (currentBalance < 0)
         {
-            reloadScene(); //lose game;
+            loseCondition(); //lose game;
+        }
+
+        if (currentBalance > 400)
+        {
+            winCondition();
         }
     }
 
@@ -51,7 +56,13 @@ public class Bank : MonoBehaviour
         displayBalance.text = "Gold: " + currentBalance;
     }
 
-    void reloadScene()
+    void loseCondition()
+    {
+        Scene myCurrentScene = SceneManager.GetActiveScene();//gets a reference to the current scene
+        SceneManager.LoadScene(myCurrentScene.buildIndex);//loads the myCurrentScene build index in this case being the active scene.
+    }
+
+    void winCondition()// change later
     {
         Scene myCurrentScene = SceneManager.GetActiveScene();//gets a reference to the current scene
         SceneManager.LoadScene(myCurrentScene.buildIndex);//loads the myCurrentScene build index in this case being the active scene.

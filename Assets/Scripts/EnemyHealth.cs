@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int Totalhitpoints = 4;
-    [SerializeField] int currentHitPoints;//serilizing the currenthitpoints will allow us to see updates on the variable in the inspector.
+
+    [Tooltip("adds amount to totalHitPoints when enemy dies")]
+    [SerializeField] int difficultyRamp = 1;
+
+    int currentHitPoints = 0;// can serilize the currenthitpoints will allow us to see updates on the variable in the inspector.
+  
     Enemy myEnemy;//creating a myEnemy variable to access enemy script.
     void OnEnable()// onEnable and on disable is called whenever a object is either enabled or disabled in the hierarchy. will reset the health if damage was taken.
     {
@@ -33,6 +39,8 @@ public class EnemyHealth : MonoBehaviour
             // Destroy(gameObject); instead of destroying the object we disable it for our object pool to reuse
 
             myEnemy.Reward();//accessing and calling the reward method in our enemy script
+            Totalhitpoints += difficultyRamp; //adds and reassigns the difficultyRamp to the totalhitPoints
+
         }
     }
 }
